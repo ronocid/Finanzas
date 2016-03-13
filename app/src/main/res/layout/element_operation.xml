@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="horizontal"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="15dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/ivSpending"
+            android:src="@drawable/gasto_press"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Gasto"
+            android:textColor="@color/white"
+            android:id="@+id/tvSpending"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="1dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:id="@+id/ivDeposit"
+            android:src="@drawable/ingreso"
+            android:layout_marginLeft="1dp"/>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Ingreso"
+            android:textColor="@color/white"
+            android:id="@+id/tvDeposit"
+            android:gravity="center"/>
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:textColor="@color/textBlue"
+        android:id="@+id/etQuantity"/>
+</LinearLayout>

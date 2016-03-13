@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="lightBlue">#b7d4e1</color>
+    <color name="textBlue">#5ea5c5</color>
+    <color name="blue">#237fa9</color>
+    <color name="darkBlue">#286783</color>
+    <color name="white">#FFFFFF</color>
+    <color name="deposit">#13b601</color>
+    <color name="spending">#FF0000</color>
+    <color name="depositdark">#129803</color>
+    <color name="spendingdark">#d60606</color>
+</resources>
