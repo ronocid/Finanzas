@@ -13,12 +13,15 @@ import android.widget.Spinner;
 
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Category;
+import org.aplie.android.myapplication.bean.Operation;
 import org.aplie.android.myapplication.bean.TypeOperation;
+import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.components.ElementDate;
 import org.aplie.android.myapplication.components.ElementOperation;
 import org.aplie.android.myapplication.data.CategoriesDB;
 import org.aplie.android.myapplication.data.OperationDB;
 import org.aplie.android.myapplication.data.TypeOperationDB;
+import org.aplie.android.myapplication.data.UsersDB;
 import org.aplie.android.myapplication.dialogs.DialogNewCategory;
 
 import java.util.List;
@@ -32,6 +35,7 @@ public class FragmentNewOperation extends Fragment{
     private ArrayAdapter<Category> adapter;
     private Button save;
     private ElementDate elementDate;
+    private User mCurrentUser;
 
     public FragmentNewOperation() {
     }
@@ -47,6 +51,8 @@ public class FragmentNewOperation extends Fragment{
         this.quantity = (ElementOperation) view.findViewById(R.id.elementOperation);
         this.description = (EditText) view.findViewById(R.id.etDescription);
         this.save = (Button) view.findViewById(R.id.buttonSave);
+
+        mCurrentUser = UsersDB.getCurrentUser(getActivity());
 
         addAdapterCategories();
         addListenerAddCategory();
@@ -64,7 +70,8 @@ public class FragmentNewOperation extends Fragment{
                 if(currentCategory!=null && hasData(valorQuantity)) {
                     quantity.getTypeOperaton();
                     TypeOperation typeOperation = TypeOperationDB.getTypeByName(getActivity(),quantity.getTypeOperaton());
-                    OperationDB.insertOperation(getActivity(),currentCategory.getId(),valorDescription,typeOperation.getId(),valorQuantity,elementDate.getDate());
+                    Operation newOperation = new Operation(valorDescription,valorQuantity,elementDate.getDate(),currentCategory,typeOperation);
+                    OperationDB.insertOperation(getActivity(),newOperation,mCurrentUser.get_id());
                     getActivity().finish();
                 }
             }
@@ -90,7 +97,7 @@ public class FragmentNewOperation extends Fragment{
     }
 
     private void addAdapterCategories() {
-        List<Category> listaCategorias = CategoriesDB.getAllCategories(getActivity());
+        List<Category> listaCategorias = CategoriesDB.getAllCategories(getActivity(),mCurrentUser.get_id());
         if(listaCategorias.size()>0){
             adapter = new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_spinner_dropdown_item, listaCategorias);

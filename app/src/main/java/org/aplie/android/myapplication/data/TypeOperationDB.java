@@ -4,19 +4,18 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-
-import org.aplie.android.myapplication.bean.Category;
+import org.aplie.android.myapplication.data.FinanceContract.TypeOperationEntry;
 import org.aplie.android.myapplication.bean.TypeOperation;
 
 public class TypeOperationDB {
-    private static Uri typeOperationUri =  FinanceContract.TypeOperationEntry.CONTENT_URI;
+    private static Uri typeOperationUri =  TypeOperationEntry.CONTENT_URI;
     private static String[] projection = new String[] {
-            FinanceContract.TypeOperationEntry._ID,
-            FinanceContract.TypeOperationEntry.COLUMN_DESCRIPTION};
+            TypeOperationEntry._ID,
+            TypeOperationEntry.COLUMN_DESCRIPTION};
 
     public static TypeOperation getTypeByName(Context context, String typeOperaton) {
         ContentResolver cr = context.getContentResolver();
-        String where = FinanceContract.TypeOperationEntry.COLUMN_DESCRIPTION+"=?";
+        String where = TypeOperationEntry.COLUMN_DESCRIPTION+"=?";
         String whereArgs[] = new String[]{typeOperaton};
         Cursor cur = cr.query(typeOperationUri,
                 projection, //Columnas a devolver
@@ -29,8 +28,8 @@ public class TypeOperationDB {
             String id;
             String description;
 
-            int colId = cur.getColumnIndex(FinanceContract.TypeOperationEntry._ID);
-            int colDescription = cur.getColumnIndex(FinanceContract.TypeOperationEntry.COLUMN_DESCRIPTION);
+            int colId = cur.getColumnIndex(TypeOperationEntry._ID);
+            int colDescription = cur.getColumnIndex(TypeOperationEntry.COLUMN_DESCRIPTION);
 
             id = cur.getString(colId);
             description = cur.getString(colDescription);

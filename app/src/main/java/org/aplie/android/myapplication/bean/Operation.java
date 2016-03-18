@@ -17,6 +17,14 @@ public class Operation {
         this.typeOperation = typeOperation;
     }
 
+    public Operation(String description, String quantity, String date, Category category, TypeOperation typeOperation) {
+        this.description = description;
+        this.quantity = quantity;
+        this.date = date;
+        this.category = category;
+        this.typeOperation = typeOperation;
+    }
+
     public String getId() {
         return id;
     }

@@ -1,0 +1,66 @@
+package org.aplie.android.myapplication.data;
+
+import android.content.ContentResolver;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+
+import org.aplie.android.myapplication.bean.User;
+import org.aplie.android.myapplication.data.FinanceContract.UserEntry;
+
+public class UsersDB {
+    private static Uri usersUri = UserEntry.CONTENT_URI;
+    private static String[] projection = new String[] {
+            UserEntry._ID,
+            UserEntry.COLUMN_USER_NAME,
+            UserEntry.COLUMN_PASSWORD,
+            UserEntry.COLUMN_EMAIL};
+
+    public static User getUserByNameEmail(Context context, String fieldName, String fieldEmail) {
+        ContentResolver cr = context.getContentResolver();
+        String where = UserEntry.COLUMN_USER_NAME +"=? and " + UserEntry.COLUMN_EMAIL+"=?";
+        String [] whereArgs = new String []{fieldName, fieldEmail};
+        Cursor cur = cr.query(usersUri,
+                projection, //Columnas a devolver
+                where,       //Condición de la query
+                whereArgs,       //Argumentos variables de la query
+                null);      //Orden de los resultados
+        User user = null;
+        while(cur.moveToNext()){
+            int id;
+            String userName;
+            String password;
+            String email;
+
+            int colId = cur.getColumnIndex(UserEntry._ID);
+            int colUserName = cur.getColumnIndex(UserEntry.COLUMN_USER_NAME);
+            int colPassword = cur.getColumnIndex(UserEntry.COLUMN_PASSWORD);
+            int colEmail = cur.getColumnIndex(UserEntry.COLUMN_EMAIL);
+
+            id = cur.getInt(colId);
+            userName = cur.getString(colUserName);
+            password = cur.getString(colPassword);
+            email = cur.getString(colEmail);
+
+            user = new User(id,userName,password,email);
+        }
+
+        return user;
+    }
+
+    public static void insertUser(Context context, User user) {
+        ContentResolver cr = context.getContentResolver();
+        ContentValues values = user.getContentValues();
+        values.remove(UserEntry._ID);
+
+        cr.insert(usersUri,values);
+    }
+
+    public static User getCurrentUser(Context context) {
+        User user = FinancePreferences.getUser(context);
+        user = getUserByNameEmail(context,user.getUserName(),user.getEmail());
+
+        return user;
+    }
+}

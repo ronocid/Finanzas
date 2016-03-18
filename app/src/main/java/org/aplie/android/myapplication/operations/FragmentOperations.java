@@ -8,21 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Operation;
+import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.components.ElementDate;
 import org.aplie.android.myapplication.components.ElementItemOperations;
 import org.aplie.android.myapplication.data.OperationDB;
+import org.aplie.android.myapplication.data.UsersDB;
 import org.aplie.android.myapplication.new_operation.NewOperationActivity;
-import org.aplie.android.myapplication.utils.DateUtils;
 
 import java.util.List;
 
 public class FragmentOperations extends Fragment {
     private LinearLayout mLayoutContainer;
     private ElementDate elementDate;
+    private User mCurrentUser;
 
     @Override
     public void onResume() {
@@ -51,6 +52,8 @@ public class FragmentOperations extends Fragment {
             }
         });
 
+        mCurrentUser = UsersDB.getCurrentUser(getActivity());
+
         this.elementDate.addOperationsView(this);
         setTitle();
         return view;
@@ -62,7 +65,7 @@ public class FragmentOperations extends Fragment {
 
     private void loadOperations() {
         this.mLayoutContainer.removeAllViews();
-        List<Operation> operations = OperationDB.getOperations(getActivity(),elementDate.getDateDay(),elementDate.getDateNextDay());
+        List<Operation> operations = OperationDB.getOperations(getActivity(),elementDate.getDateDay(),elementDate.getDateNextDay(), mCurrentUser.get_id());
 
         for(Operation operation : operations){
             ElementItemOperations eio = new ElementItemOperations(getActivity(),operation);

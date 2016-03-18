@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,7 +56,7 @@ public class ElementItemOperations  extends LinearLayout {
                     }
                 });
 
-                categotyOperation.setText(this.operation.getCategory().getDescription());
+                categotyOperation.setText(this.operation.getCategory().getCatdescription());
                 quantityOperation.setText("-" + this.operation.getQuantity() + "€");
                 descriptionOperation.setText(this.operation.getDescription());
                 dateOperation.setText(DateUtils.formatearDBDate(this.operation.getDate()));
@@ -80,7 +79,7 @@ public class ElementItemOperations  extends LinearLayout {
                         edg.changeMode();
                     }
                 });
-                categotyOperation.setText(this.operation.getCategory().getDescription());
+                categotyOperation.setText(this.operation.getCategory().getCatdescription());
                 quantityOperation.setText(this.operation.getQuantity() + "€");
                 descriptionOperation.setText(this.operation.getDescription());
                 dateOperation.setText(DateUtils.formatearDBDate(this.operation.getDate()));

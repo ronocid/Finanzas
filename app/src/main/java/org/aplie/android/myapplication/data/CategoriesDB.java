@@ -7,33 +7,35 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import org.aplie.android.myapplication.bean.Category;
-import org.aplie.android.myapplication.utils.FinanceConstants;
+import org.aplie.android.myapplication.data.FinanceContract.CategotyEntry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesDB {
-    private static Uri categoriesUri =  FinanceContract.CategotyEntry.CONTENT_URI;
+    private static Uri categoriesUri =  CategotyEntry.CONTENT_URI;
     private static String[] projection = new String[] {
-            FinanceContract.CategotyEntry._ID,
-            FinanceContract.CategotyEntry.COLUMN_DESCRIPTION};
+            CategotyEntry._ID,
+            CategotyEntry.COLUMN_DESCRIPTION};
 
-    public static List<Category> getAllCategories(Context context){
+    public static List<Category> getAllCategories(Context context, int idUser){
         List<Category> list = new ArrayList<>();
         ContentResolver cr = context.getContentResolver();
 
+        String where = CategotyEntry.COLUMN_USER_ID+"=?";
+        String [] whereArgs = new String []{String.valueOf(idUser)};
         Cursor cur = cr.query(categoriesUri,
                 projection, //Columnas a devolver
-                null,       //Condición de la query
-                null,       //Argumentos variables de la query
+                where,       //Condición de la query
+                whereArgs,       //Argumentos variables de la query
                 null);      //Orden de los resultados
 
         while(cur.moveToNext()){
             String id;
             String description;
 
-            int colId = cur.getColumnIndex(FinanceContract.CategotyEntry._ID);
-            int colDescription = cur.getColumnIndex(FinanceContract.CategotyEntry.COLUMN_DESCRIPTION);
+            int colId = cur.getColumnIndex(CategotyEntry._ID);
+            int colDescription = cur.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
 
             id = cur.getString(colId);
             description = cur.getString(colDescription);
@@ -45,16 +47,17 @@ public class CategoriesDB {
 
     public static void insertCategory(Context context, Category categoty) {
         ContentResolver cr = context.getContentResolver();
-        ContentValues values = new ContentValues();
+        ContentValues values = categoty.getContentValues();
 
-        values.put(FinanceContract.CategotyEntry.COLUMN_DESCRIPTION, categoty.getDescription());
+        values.remove(CategotyEntry._ID);
+
         cr.insert(categoriesUri,values);
     }
 
-    public static Category getCategoriyByDescription(Context context, String fieldDescription) {
+    public static Category getCategoriyByDescription(Context context, String fieldDescription, int idUser) {
         ContentResolver cr = context.getContentResolver();
-        String where = FinanceContract.CategotyEntry.COLUMN_DESCRIPTION +"=?";
-        String [] whereArgs = new String []{fieldDescription};
+        String where = CategotyEntry.COLUMN_DESCRIPTION +"=? and "+CategotyEntry.COLUMN_USER_ID+"=?";
+        String [] whereArgs = new String []{fieldDescription,String.valueOf(idUser)};
         Cursor cur = cr.query(categoriesUri,
                 projection, //Columnas a devolver
                 where,       //Condición de la query
@@ -65,8 +68,8 @@ public class CategoriesDB {
             String id;
             String description;
 
-            int colId = cur.getColumnIndex(FinanceContract.CategotyEntry._ID);
-            int colDescription = cur.getColumnIndex(FinanceContract.CategotyEntry.COLUMN_DESCRIPTION);
+            int colId = cur.getColumnIndex(CategotyEntry._ID);
+            int colDescription = cur.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
 
             id = cur.getString(colId);
             description = cur.getString(colDescription);

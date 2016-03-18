@@ -12,25 +12,30 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Category;
+import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.data.CategoriesDB;
-
-import java.util.List;
+import org.aplie.android.myapplication.data.UsersDB;
 
 public class DialogNewCategory{
+    private User mCurrentUser;
+
     public void launchDialog(final Activity activity, final ArrayAdapter<Category> adapter) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
 
         View view = inflater.inflate(R.layout.dialog_new_category, null);
         final EditText editText = (EditText) view.findViewById(R.id.etNewCategory);
+
+        mCurrentUser = UsersDB.getCurrentUser(activity);
+
         builder.setView(view)
                 .setPositiveButton(R.string.dialog_positive_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String text = editText.getText().toString();
-                        Category category = new Category("0",text);
+                        Category category = new Category("0",text,mCurrentUser.get_id());
                         CategoriesDB.insertCategory(activity, category);
-                        category = CategoriesDB.getCategoriyByDescription(activity,category.getDescription());
+                        category = CategoriesDB.getCategoriyByDescription(activity,category.getCatdescription(),mCurrentUser.get_id());
                         if(adapter != null){
                             adapter.add(category);
                         }

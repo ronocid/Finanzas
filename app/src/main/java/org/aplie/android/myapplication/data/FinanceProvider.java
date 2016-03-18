@@ -16,6 +16,7 @@ public class FinanceProvider extends ContentProvider {
     static final int CATEGOTY = 100;
     static final int TYPE_OPERATION = 200;
     static final int OPERATION = 300;
+    static final int USER = 400;
     @Override
     public boolean onCreate() {
         mOpenHelper = new FinanceDbHelper(getContext());
@@ -60,6 +61,11 @@ public class FinanceProvider extends ContentProvider {
                 retCursor = sOperationByCategorySettingQueryBuild.query(mOpenHelper.getReadableDatabase(),projection,selection,selectionArgs,null,null,sortOrder);
                 break;
             }
+            case USER:
+            {
+                retCursor = mOpenHelper.getReadableDatabase().query(FinanceContract.UserEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -73,6 +79,8 @@ public class FinanceProvider extends ContentProvider {
         final int match = sUriMatcher.match(uri);
 
         switch (match) {
+            case USER:
+                return FinanceContract.UserEntry.CONTENT_ITEM_TYPE;
             case CATEGOTY:
                 return FinanceContract.CategotyEntry.CONTENT_ITEM_TYPE;
             case TYPE_OPERATION:
@@ -116,6 +124,14 @@ public class FinanceProvider extends ContentProvider {
                     throw new android.database.SQLException("Failed to insert row into " + uri);
                 break;
             }
+            case USER: {
+                long _id = db.insert(FinanceContract.UserEntry.TABLE_NAME, null, values);
+                if ( _id > 0 )
+                    returnUri = FinanceContract.UserEntry.buildUserUri(_id);
+                else
+                    throw new android.database.SQLException("Failed to insert row into " + uri);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -141,6 +157,10 @@ public class FinanceProvider extends ContentProvider {
             }
             case OPERATION: {
                 rowsDelete = db.delete(FinanceContract.OperationEntry.TABLE_NAME, selection, selectionArgs);
+                break;
+            }
+            case USER: {
+                rowsDelete = db.delete(FinanceContract.UserEntry.TABLE_NAME, selection, selectionArgs);
                 break;
             }
             default:
@@ -172,6 +192,10 @@ public class FinanceProvider extends ContentProvider {
                 rowsUpdate = db.update(FinanceContract.OperationEntry.TABLE_NAME, values, selection, selectionArgs);
                 break;
             }
+            case USER: {
+                rowsUpdate = db.update(FinanceContract.UserEntry.TABLE_NAME, values, selection, selectionArgs);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -188,6 +212,7 @@ public class FinanceProvider extends ContentProvider {
         sUriMatcher.addURI(FinanceContract.CONTENT_AUTHORITY,FinanceContract.PATH_CATEGOTY,CATEGOTY);
         sUriMatcher.addURI(FinanceContract.CONTENT_AUTHORITY,FinanceContract.PATH_TYPE_OPERATION,TYPE_OPERATION);
         sUriMatcher.addURI(FinanceContract.CONTENT_AUTHORITY,FinanceContract.PATH_OPERATION,OPERATION);
+        sUriMatcher.addURI(FinanceContract.CONTENT_AUTHORITY,FinanceContract.PATH_USER,USER);
 
         return sUriMatcher;
     }
