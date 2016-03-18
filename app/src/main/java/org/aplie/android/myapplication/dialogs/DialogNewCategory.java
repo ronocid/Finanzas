@@ -14,6 +14,8 @@ import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Category;
 import org.aplie.android.myapplication.data.CategoriesDB;
 
+import java.util.List;
+
 public class DialogNewCategory{
     public void launchDialog(final Activity activity, final ArrayAdapter<Category> adapter) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
@@ -26,10 +28,11 @@ public class DialogNewCategory{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String text = editText.getText().toString();
-                        Category categoty = new Category("0",text);
-                        CategoriesDB.insertCategory(activity,categoty);
+                        Category category = new Category("0",text);
+                        CategoriesDB.insertCategory(activity, category);
+                        category = CategoriesDB.getCategoriyByDescription(activity,category.getDescription());
                         if(adapter != null){
-                            adapter.add(categoty);
+                            adapter.add(category);
                         }
                     }
                 })

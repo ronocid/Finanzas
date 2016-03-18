@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 
 import org.aplie.android.myapplication.bean.Category;
+import org.aplie.android.myapplication.utils.FinanceConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,5 +49,31 @@ public class CategoriesDB {
 
         values.put(FinanceContract.CategotyEntry.COLUMN_DESCRIPTION, categoty.getDescription());
         cr.insert(categoriesUri,values);
+    }
+
+    public static Category getCategoriyByDescription(Context context, String fieldDescription) {
+        ContentResolver cr = context.getContentResolver();
+        String where = FinanceContract.CategotyEntry.COLUMN_DESCRIPTION +"=?";
+        String [] whereArgs = new String []{fieldDescription};
+        Cursor cur = cr.query(categoriesUri,
+                projection, //Columnas a devolver
+                where,       //Condición de la query
+                whereArgs,       //Argumentos variables de la query
+                null);      //Orden de los resultados
+        Category category = null;
+        while(cur.moveToNext()){
+            String id;
+            String description;
+
+            int colId = cur.getColumnIndex(FinanceContract.CategotyEntry._ID);
+            int colDescription = cur.getColumnIndex(FinanceContract.CategotyEntry.COLUMN_DESCRIPTION);
+
+            id = cur.getString(colId);
+            description = cur.getString(colDescription);
+
+            category = new Category(id,description);
+        }
+
+        return category;
     }
 }
