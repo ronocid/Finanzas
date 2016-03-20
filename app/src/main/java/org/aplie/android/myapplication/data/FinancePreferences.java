@@ -2,31 +2,39 @@ package org.aplie.android.myapplication.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
+import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.User;
 
 public class FinancePreferences {
-    public static final String USER_NAME = "userName";
-    public static final String USER_EMAIL = "email";
-    public static final String PREFERENCES_NAME = "finanzas";
+    private SharedPreferences preferences;
+    private Context context;
 
-    private static SharedPreferences getPreferences (Context context){
-        return context.getSharedPreferences(PREFERENCES_NAME,Context.MODE_PRIVATE);
+    public FinancePreferences (Context context){
+        this.context = context;
+        this.preferences= PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public static void saveNewUser(Context context, User user) {
-        SharedPreferences preferences = getPreferences(context);
+    public void saveNewUser(User user) {
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(USER_NAME, user.getUserName());
-        editor.putString(USER_EMAIL, user.getEmail());
+        editor.putString(context.getString(R.string.pref_key_userName), user.getUserName());
+        editor.putString(context.getString(R.string.pref_key_email), user.getEmail());
         editor.commit();
     }
 
-    public static User getUser(Context context) {
-        SharedPreferences preferences = getPreferences(context);
-        String name = preferences.getString(USER_NAME, "");
-        String email = preferences.getString(USER_EMAIL, "");
+    public User getUser() {
+        String name = preferences.getString(context.getString(R.string.pref_key_userName), "");
+        String email = preferences.getString(context.getString(R.string.pref_key_email), "");
         User user = new User(0,name,"",email);
         return user;
+    }
+
+    public boolean isRememberEmail(){
+        return preferences.getBoolean(context.getString(R.string.pref_key_rememberEmail),false);
+    }
+
+    public boolean isRememberName(){
+        return preferences.getBoolean(context.getString(R.string.pref_key_rememberUserName),false);
     }
 }

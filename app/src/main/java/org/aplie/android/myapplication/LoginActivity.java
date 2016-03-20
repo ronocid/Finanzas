@@ -89,6 +89,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        preferences();
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -99,6 +101,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+    }
+
+    private void preferences() {
+        FinancePreferences pref = new FinancePreferences(this);
+
+        boolean remEmail = pref.isRememberEmail();
+        boolean remName = pref.isRememberName();
+
+        User user = pref.getUser();
+
+        if(remEmail){
+            String email = user.getEmail();
+            if(!TextUtils.isEmpty(email)){
+                mEmailView.setText(email);
+                mUserView.requestFocus();
+            }
+        }
+
+        if(remName){
+            String name = user.getUserName();
+            if(!TextUtils.isEmpty(name)){
+                mUserView.setText(name);
+                mPasswordView.requestFocus();
+            }
+        }
     }
 
     private void populateAutoComplete() {
@@ -364,7 +391,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                FinancePreferences.saveNewUser(getBaseContext(), mUser);
+                FinancePreferences pref = new FinancePreferences(getBaseContext());
+                pref.saveNewUser(mUser);
                 Intent i = new Intent(getBaseContext(),MainActivity.class);
                 startActivity(i);
                 finish();

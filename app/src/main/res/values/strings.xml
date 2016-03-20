@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Finanzas</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_login">Sign in</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,7 +13,7 @@
     <string name="dialog_positive_button">Aceptar</string>
     <string name="dialog_negative_button">Cancelar</string>
     <string name="button_text_save">Guardar</string>
-    <string name="title_activity_login">Sign in</string>
+
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -27,4 +29,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="pref_key_email">email</string>
+    <string name="pref_key_userName">userName</string>
+    <string name="pref_key_rememberEmail">rememberEmail</string>
+    <string name="pref_key_rememberUserName">rememberUserName</string>
 </resources>

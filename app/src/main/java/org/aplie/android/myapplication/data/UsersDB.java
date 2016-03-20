@@ -58,9 +58,17 @@ public class UsersDB {
     }
 
     public static User getCurrentUser(Context context) {
-        User user = FinancePreferences.getUser(context);
+        FinancePreferences pref = new FinancePreferences(context);
+        User user = pref.getUser();
         user = getUserByNameEmail(context,user.getUserName(),user.getEmail());
 
         return user;
+    }
+
+    public static void update(Context context, User user) {
+        ContentResolver cr = context.getContentResolver();
+        String where = UserEntry._ID+"=?";
+        String whereArgs [] = new String[]{String.valueOf(user.get_id())};
+        cr.update(usersUri,user.getContentValues(),where,whereArgs);
     }
 }

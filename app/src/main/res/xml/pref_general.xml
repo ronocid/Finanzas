@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <EditTextPreference
+        android:key="@string/pref_key_email"
+        android:title="Email"
+        android:summary="Cambia el email actual"
+        android:dialogTitle="Introduce el nuevo email"/>
+
+    <EditTextPreference
+        android:key="@string/pref_key_userName"
+        android:title="Nombre del Usuario"
+        android:summary="Cambia el nombre de usuario actual"
+        android:dialogTitle="Introduce el nuevo nombre"/>
+
+    <CheckBoxPreference
+        android:key="@string/pref_key_rememberEmail"
+        android:title="Recordar Email"
+        android:summary="Mantiene el email en el login del último usuario de la aplicación"/>
+
+    <CheckBoxPreference
+        android:key="@string/pref_key_rememberUserName"
+        android:title="Recordar Nombre de Usuario"
+        android:summary="Mantiene el nombre en el login del último usuario de la aplicación"/>
+</PreferenceScreen>
