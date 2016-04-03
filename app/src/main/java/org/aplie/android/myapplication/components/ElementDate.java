@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.new_operation.DatePickerFragment;
-import org.aplie.android.myapplication.operations.FragmentOperations;
+import org.aplie.android.myapplication.operations_day.FragmentOperationsDay;
 import org.aplie.android.myapplication.utils.DateUtils;
 
 import java.util.Calendar;
@@ -21,7 +21,7 @@ public class ElementDate extends LinearLayout {
     private TextView tvDate;
     private ImageButton ibCalendar;
     private Calendar calendar;
-    private FragmentOperations fragmentOperations;
+    private FragmentOperationsDay fragmentOperations;
 
     public ElementDate(Context context) {
         super(context);
@@ -74,7 +74,7 @@ public class ElementDate extends LinearLayout {
         return String.valueOf(calendar.getTimeInMillis());
     }
 
-    public void addOperationsView(FragmentOperations fragmentOperations) {
+    public void addOperationsView(FragmentOperationsDay fragmentOperations) {
         this.fragmentOperations = fragmentOperations;
     }
 

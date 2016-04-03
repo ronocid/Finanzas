@@ -15,4 +15,11 @@ public class DateUtils {
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         return formateador.format(calendar.getTime());
     }
+
+    public static String dayMonthYear(String date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(Long.parseLong(date));
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        return formateador.format(calendar.getTime());
+    }
 }

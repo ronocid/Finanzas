@@ -1,4 +1,4 @@
-package org.aplie.android.myapplication.operations;
+package org.aplie.android.myapplication.operations_day;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import org.aplie.android.myapplication.new_operation.NewOperationActivity;
 
 import java.util.List;
 
-public class FragmentOperations extends Fragment {
+public class FragmentOperationsDay extends Fragment {
     private LinearLayout mLayoutContainer;
     private ElementDate elementDate;
     private User mCurrentUser;
@@ -31,14 +31,14 @@ public class FragmentOperations extends Fragment {
         loadOperations();
     }
 
-    public FragmentOperations() {
+    public FragmentOperationsDay() {
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_operaciones, container, false);
+        View view = inflater.inflate(R.layout.fragment_operaciones_day, container, false);
         this.mLayoutContainer = (LinearLayout) view.findViewById(R.id.container);
         this.elementDate = (ElementDate) view.findViewById(R.id.elementDate);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -65,7 +65,7 @@ public class FragmentOperations extends Fragment {
 
     private void loadOperations() {
         this.mLayoutContainer.removeAllViews();
-        List<Operation> operations = OperationDB.getOperations(getActivity(),elementDate.getDateDay(),elementDate.getDateNextDay(), mCurrentUser.get_id());
+        List<Operation> operations = OperationDB.getOperationsDay(getActivity(), elementDate.getDateDay(), elementDate.getDateNextDay(), mCurrentUser.get_id());
 
         for(Operation operation : operations){
             ElementItemOperations eio = new ElementItemOperations(getActivity(),operation);
