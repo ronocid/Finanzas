@@ -1,21 +1,25 @@
-package org.aplie.android.myapplication.operations_month;
-
+package org.aplie.android.myapplication.operations_year;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Operation;
+import org.aplie.android.myapplication.operations_month.GroupItem;
+import org.aplie.android.myapplication.utils.DateUtils;
+import org.aplie.android.myapplication.utils.FinanceConstants;
 
 import java.util.List;
 
-public class AdapterExpandibleList extends BaseExpandableListAdapter{
+public class AdapterExpandibleListYear extends BaseExpandableListAdapter {
     private final Context contetx;
     private final List<GroupItem> listGroup;
 
-    public AdapterExpandibleList(Context context, List<GroupItem> listGroup){
+    public AdapterExpandibleListYear(Context context, List<GroupItem> listGroup){
         this.contetx = context;
         this.listGroup = listGroup;
     }
@@ -57,17 +61,34 @@ public class AdapterExpandibleList extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        TextView textView = new TextView(contetx);
-        textView.setText((String) getGroup(groupPosition));
-        return textView;
+        LayoutInflater inflater = LayoutInflater.from(contetx);
+        View view = inflater.inflate(R.layout.item_group_expandible, null);
+        TextView title = (TextView) view.findViewById(R.id.title_group);
+        title.setText((String) getGroup(groupPosition));
+
+        return view;
     }
 
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        TextView textView = new TextView(contetx);
+        LayoutInflater inflater = LayoutInflater.from(contetx);
+        View view = inflater.inflate(R.layout.item_child_expandible, null);
         Operation operation = (Operation) getChild(groupPosition, childPosition);
-        textView.setText((operation.getCategory().getCatdescription()));
-        return textView;
+
+        TextView title = (TextView) view.findViewById(R.id.title_child);
+        title.setText((DateUtils.dayMonthYear(operation.getDate())));
+        /*TextView spend = (TextView) view.findViewById(R.id.gasto);
+        TextView deposit = (TextView) view.findViewById(R.id.ingreso);
+
+        if(FinanceConstants.INGRESO.equals(operation.getTypeOperation().getDescription())){
+            spend.setVisibility(View.GONE);
+            deposit.setText(operation.getQuantity()+ FinanceConstants.EURO);
+        }else{
+            deposit.setVisibility(View.GONE);
+            spend.setText(operation.getQuantity() + FinanceConstants.EURO);
+        }*/
+
+        return view;
     }
 
     @Override

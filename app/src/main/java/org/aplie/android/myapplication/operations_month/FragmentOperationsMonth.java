@@ -42,7 +42,7 @@ public class FragmentOperationsMonth extends Fragment{
         requestOperation();
         createGroups();
 
-        AdapterExpandibleList adapter = new AdapterExpandibleList(getActivity(),listGroup);
+        AdapterExpandibleListMonth adapter = new AdapterExpandibleListMonth(getActivity(),listGroup);
         list.setAdapter(adapter);
 
         setTitle();
@@ -53,11 +53,19 @@ public class FragmentOperationsMonth extends Fragment{
         listGroup = new ArrayList<>();
 
         HashMap<String,List<Operation>> mapGroups = groups();
-        Set<String> keys = mapGroups.keySet();
-        for(String key: keys){
+        Calendar currentCalendar = Calendar.getInstance();
+        currentCalendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), 1);
+        currentCalendar.add(Calendar.MONTH, 1);
+        currentCalendar.add(Calendar.DAY_OF_MONTH, -1);
+        int lastDay = currentCalendar.get(Calendar.DAY_OF_MONTH);
+        //Set<String> keys = mapGroups.keySet();
+        for(int count =1;count<=lastDay;count++){
+            String key = DateUtils.formatNumberLessTen(count)+"/"+DateUtils.formatNumberLessTen((currentCalendar.get(Calendar.MONTH)+1))+"/"+currentCalendar.get(Calendar.YEAR);
             List<Operation> operationList = mapGroups.get(key);
 
-            listGroup.add(new GroupItem(key,operationList));
+            if(operationList != null){
+                listGroup.add(new GroupItem(key,operationList));
+            }
         }
     }
 

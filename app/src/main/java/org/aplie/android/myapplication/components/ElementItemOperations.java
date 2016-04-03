@@ -13,19 +13,16 @@ import org.aplie.android.myapplication.utils.DateUtils;
 import org.aplie.android.myapplication.utils.FinanceConstants;
 
 public class ElementItemOperations  extends LinearLayout {
-    private final Context context;
     private final Operation operation;
 
     public ElementItemOperations(Context context, Operation operation) {
         super(context);
-        this.context  = context;
         this.operation = operation;
         inicialize();
     }
 
     public ElementItemOperations(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.context  = context;
         this.operation = null;
         inicialize();
     }
@@ -57,7 +54,7 @@ public class ElementItemOperations  extends LinearLayout {
                 });
 
                 categotyOperation.setText(this.operation.getCategory().getCatdescription());
-                quantityOperation.setText("-" + this.operation.getQuantity() + "€");
+                quantityOperation.setText("-" + this.operation.getQuantity() + FinanceConstants.EURO);
                 descriptionOperation.setText(this.operation.getDescription());
                 dateOperation.setText(DateUtils.formatearDBDate(this.operation.getDate()));
             }else{
@@ -80,7 +77,7 @@ public class ElementItemOperations  extends LinearLayout {
                     }
                 });
                 categotyOperation.setText(this.operation.getCategory().getCatdescription());
-                quantityOperation.setText(this.operation.getQuantity() + "€");
+                quantityOperation.setText(this.operation.getQuantity() + FinanceConstants.EURO);
                 descriptionOperation.setText(this.operation.getDescription());
                 dateOperation.setText(DateUtils.formatearDBDate(this.operation.getDate()));
             }
