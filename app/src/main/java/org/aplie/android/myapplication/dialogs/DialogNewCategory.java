@@ -13,8 +13,8 @@ import android.widget.EditText;
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.Category;
 import org.aplie.android.myapplication.bean.User;
-import org.aplie.android.myapplication.data.CategoriesDB;
-import org.aplie.android.myapplication.data.UsersDB;
+import org.aplie.android.myapplication.data.tables.CategoriesDB;
+import org.aplie.android.myapplication.data.tables.UsersDB;
 
 public class DialogNewCategory{
     private User mCurrentUser;

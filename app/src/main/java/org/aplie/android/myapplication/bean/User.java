@@ -18,6 +18,10 @@ public class User extends BasicBean {
         this.email = email;
     }
 
+    public User() {
+
+    }
+
     public int get_id() {
         return _id;
     }
@@ -40,5 +44,13 @@ public class User extends BasicBean {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

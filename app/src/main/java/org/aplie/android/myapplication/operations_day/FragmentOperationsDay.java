@@ -14,8 +14,8 @@ import org.aplie.android.myapplication.bean.Operation;
 import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.components.ElementDate;
 import org.aplie.android.myapplication.components.ElementItemOperations;
-import org.aplie.android.myapplication.data.OperationDB;
-import org.aplie.android.myapplication.data.UsersDB;
+import org.aplie.android.myapplication.data.tables.OperationDB;
+import org.aplie.android.myapplication.data.tables.UsersDB;
 import org.aplie.android.myapplication.new_operation.NewOperationActivity;
 
 import java.util.List;

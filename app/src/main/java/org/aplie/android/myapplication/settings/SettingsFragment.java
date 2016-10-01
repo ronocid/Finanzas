@@ -11,7 +11,7 @@ import android.text.TextUtils;
 import org.aplie.android.myapplication.R;
 import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.data.FinancePreferences;
-import org.aplie.android.myapplication.data.UsersDB;
+import org.aplie.android.myapplication.data.tables.UsersDB;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener{
     @Override

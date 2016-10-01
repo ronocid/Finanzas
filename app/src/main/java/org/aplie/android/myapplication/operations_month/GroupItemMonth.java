@@ -4,11 +4,11 @@ import org.aplie.android.myapplication.bean.Operation;
 
 import java.util.List;
 
-public class GroupItem {
+public class GroupItemMonth {
     private String group;
     private List<Operation> children;
 
-    public GroupItem(String group, List<Operation> children) {
+    public GroupItemMonth(String group, List<Operation> children) {
         this.group = group;
         this.children = children;
     }

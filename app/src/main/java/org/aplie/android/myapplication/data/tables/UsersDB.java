@@ -1,4 +1,4 @@
-package org.aplie.android.myapplication.data;
+package org.aplie.android.myapplication.data.tables;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -8,27 +8,29 @@ import android.net.Uri;
 
 import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.data.FinanceContract.UserEntry;
+import org.aplie.android.myapplication.data.FinanceDbHelper;
+import org.aplie.android.myapplication.data.FinancePreferences;
 
 public class UsersDB {
     private static Uri usersUri = UserEntry.CONTENT_URI;
-    private static String[] projection = new String[] {
+    /*private static String[] projection = new String[] {
             UserEntry._ID,
             UserEntry.COLUMN_USER_NAME,
             UserEntry.COLUMN_PASSWORD,
-            UserEntry.COLUMN_EMAIL};
+            UserEntry.COLUMN_EMAIL};*/
 
     public static User getUserByNameEmail(Context context, String fieldName, String fieldEmail) {
         ContentResolver cr = context.getContentResolver();
         String where = UserEntry.COLUMN_USER_NAME +"=? and " + UserEntry.COLUMN_EMAIL+"=?";
         String [] whereArgs = new String []{fieldName, fieldEmail};
-        Cursor cur = cr.query(usersUri,
-                projection, //Columnas a devolver
+        Cursor cursor = cr.query(usersUri,
+                null, //Columnas a devolver
                 where,       //Condición de la query
                 whereArgs,       //Argumentos variables de la query
                 null);      //Orden de los resultados
         User user = null;
-        while(cur.moveToNext()){
-            int id;
+        if(cursor.moveToFirst()){
+            /*int id;
             String userName;
             String password;
             String email;
@@ -43,7 +45,8 @@ public class UsersDB {
             password = cur.getString(colPassword);
             email = cur.getString(colEmail);
 
-            user = new User(id,userName,password,email);
+            user = new User(id,userName,password,email);*/
+            user = (User) FinanceDbHelper.fillObject(cursor,new User());
         }
 
         return user;

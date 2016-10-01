@@ -32,7 +32,7 @@ public class ElementItemOperations  extends LinearLayout {
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(infService);
 
         if(this.operation != null){
-            if(FinanceConstants.GASTO.equals(this.operation.getTypeOperation().getDescription())){
+            if(FinanceConstants.GASTO.equals(this.operation.getTypeOperation().getOperationDescription())){
                 li.inflate(R.layout.element_item_operations_red, this, true);
                 TextView categotyOperation = (TextView) findViewById(R.id.tvCategory);
                 TextView quantityOperation = (TextView) findViewById(R.id.tvQuantity);
@@ -40,21 +40,24 @@ public class ElementItemOperations  extends LinearLayout {
                 TextView descriptionOperation = (TextView) findViewById(R.id.tvDescription);
                 final ElementDeployRed edr = (ElementDeployRed) findViewById(R.id.deployHoritzontal);
                 final LinearLayout layoutDescription = (LinearLayout) findViewById(R.id.layoutDescription);
+                final LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
 
                 edr.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(edr.isDesplegado()){
                             layoutDescription.setVisibility(View.GONE);
+                            layout.setBackgroundColor(getResources().getColor(R.color.spending));
                         }else{
                             layoutDescription.setVisibility(View.VISIBLE);
+                            layout.setBackgroundColor(getResources().getColor(R.color.white));
                         }
                         edr.changeMode();
                     }
                 });
 
                 categotyOperation.setText(this.operation.getCategory().getCatdescription());
-                quantityOperation.setText("-" + this.operation.getQuantity() + FinanceConstants.EURO);
+                quantityOperation.setText(FinanceConstants.LESS + this.operation.getQuantity() + FinanceConstants.EURO);
                 descriptionOperation.setText(this.operation.getDescription());
                 dateOperation.setText(DateUtils.formatearDBDate(this.operation.getDate()));
             }else{
@@ -65,13 +68,16 @@ public class ElementItemOperations  extends LinearLayout {
                 TextView descriptionOperation = (TextView) findViewById(R.id.tvDescription);
                 final ElementDeployGreen edg = (ElementDeployGreen) findViewById(R.id.deployHoritzontal);
                 final LinearLayout layoutDescription = (LinearLayout) findViewById(R.id.layoutDescription);
+                final LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
                 edg.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if(edg.isDesplegado()){
                             layoutDescription.setVisibility(View.GONE);
+                            layout.setBackgroundColor(getResources().getColor(R.color.deposit));
                         }else{
                             layoutDescription.setVisibility(View.VISIBLE);
+                            layout.setBackgroundColor(getResources().getColor(R.color.white));
                         }
                         edg.changeMode();
                     }

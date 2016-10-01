@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/description"
+                        android:text="@string/operationDescription"
                         android:id="@+id/tvDescription"
                         android:textColor="@color/colorPrimaryDark"/>
 
@@ -113,7 +113,7 @@
             </LinearLayout>
 
             <Button
-                style="@style/buttonSave"
+                style="@style/button_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/button_text_save"

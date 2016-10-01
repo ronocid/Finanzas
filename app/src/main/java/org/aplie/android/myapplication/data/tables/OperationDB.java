@@ -1,4 +1,4 @@
-package org.aplie.android.myapplication.data;
+package org.aplie.android.myapplication.data.tables;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentActivity;
 import org.aplie.android.myapplication.bean.Category;
 import org.aplie.android.myapplication.bean.Operation;
 import org.aplie.android.myapplication.bean.TypeOperation;
+import org.aplie.android.myapplication.data.FinanceContract;
 import org.aplie.android.myapplication.data.FinanceContract.OperationEntry;
 import org.aplie.android.myapplication.data.FinanceContract.CategotyEntry;
 import org.aplie.android.myapplication.data.FinanceContract.TypeOperationEntry;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class OperationDB {
     private static Uri operationUri =  FinanceContract.OperationEntry.CONTENT_URI;
-    private static String[] projection = new String[] {
+    /*private static String[] projection = new String[] {
             OperationEntry.TABLE_NAME+"."+OperationEntry._ID,
             OperationEntry.TABLE_NAME+"."+OperationEntry.COLUMN_DESCRIPTION,
             OperationEntry.TABLE_NAME+"."+OperationEntry.COLUMN_QUANTITY,
@@ -28,7 +29,7 @@ public class OperationDB {
             OperationEntry.TABLE_NAME+"."+OperationEntry.COLUMN_ID_CATEGORY,
             CategotyEntry.TABLE_NAME+"."+CategotyEntry.COLUMN_DESCRIPTION,
             OperationEntry.TABLE_NAME+"."+OperationEntry.COLUMN_ID_TYPE_OPERATION,
-            CategotyEntry.TABLE_NAME+"."+TypeOperationEntry.COLUMN_DESCRIPTION};
+            CategotyEntry.TABLE_NAME+"."+TypeOperationEntry.COLUMN_DESCRIPTION};*/
 
     public static void insertOperation(Context context, Operation newOperation, int idUser){
         ContentResolver cr = context.getContentResolver();
@@ -51,22 +52,22 @@ public class OperationDB {
         String [] whereArgs = new String[]{dateDay,dateNextDay,String.valueOf(idUser)};
         String order = OperationEntry.COLUMN_DATE;
 
-        Cursor cur = cr.query(operationUri,
+        Cursor cursor = cr.query(operationUri,
                 null, //Columnas a devolver
                 where,       //Condición de la query
                 whereArgs,       //Argumentos variables de la query
                 order);      //Orden de los resultados
 
-        int colId = cur.getColumnIndex(FinanceContract.OperationEntry._ID);
-        int colDescription = cur.getColumnIndex(OperationEntry.COLUMN_DESCRIPTION);
-        int colQuantity = cur.getColumnIndex(OperationEntry.COLUMN_QUANTITY);
-        int colDate = cur.getColumnIndex(OperationEntry.COLUMN_DATE);
-        int colIdCategory = cur.getColumnIndex(OperationEntry.COLUMN_ID_CATEGORY);
-        int colCategory = cur.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
-        int colIdType = cur.getColumnIndex(OperationEntry.COLUMN_ID_TYPE_OPERATION);
-        int colType = cur.getColumnIndex(TypeOperationEntry.COLUMN_DESCRIPTION);
+        int colId = cursor.getColumnIndex(FinanceContract.OperationEntry._ID);
+        int colDescription = cursor.getColumnIndex(OperationEntry.COLUMN_DESCRIPTION);
+        int colQuantity = cursor.getColumnIndex(OperationEntry.COLUMN_QUANTITY);
+        int colDate = cursor.getColumnIndex(OperationEntry.COLUMN_DATE);
+        int colIdCategory = cursor.getColumnIndex(OperationEntry.COLUMN_ID_CATEGORY);
+        int colCategory = cursor.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
+        int colIdType = cursor.getColumnIndex(OperationEntry.COLUMN_ID_TYPE_OPERATION);
+        int colType = cursor.getColumnIndex(TypeOperationEntry.COLUMN_DESCRIPTION);
 
-        while(cur.moveToNext()){
+        while(cursor.moveToNext()){
             String id;
             String description;
             String quantity;
@@ -76,14 +77,14 @@ public class OperationDB {
             String idType;
             String desType;
 
-            id = cur.getString(colId);
-            description = cur.getString(colDescription);
-            quantity  = cur.getString(colQuantity);
-            date  = cur.getString(colDate);
-            idCategory = cur.getString(colIdCategory);
-            desCategory = cur.getString(colCategory);
-            idType = cur.getString(colIdType);
-            desType = cur.getString(colType);
+            id = cursor.getString(colId);
+            description = cursor.getString(colDescription);
+            quantity  = cursor.getString(colQuantity);
+            date  = cursor.getString(colDate);
+            idCategory = cursor.getString(colIdCategory);
+            desCategory = cursor.getString(colCategory);
+            idType = cursor.getString(colIdType);
+            desType = cursor.getString(colType);
 
             Category category = new Category(idCategory,desCategory);
             TypeOperation typeOperation = new TypeOperation(idType,desType);
@@ -100,22 +101,22 @@ public class OperationDB {
         String [] whereArgs = new String[]{beginningMonth,beginningNextMonth,String.valueOf(idUser)};
         String order = OperationEntry.COLUMN_DATE;
 
-        Cursor cur = cr.query(operationUri,
+        Cursor cursor = cr.query(operationUri,
                 null, //Columnas a devolver
                 where,       //Condición de la query
                 whereArgs,       //Argumentos variables de la query
                 order);      //Orden de los resultados
 
-        int colId = cur.getColumnIndex(FinanceContract.OperationEntry._ID);
-        int colDescription = cur.getColumnIndex(OperationEntry.COLUMN_DESCRIPTION);
-        int colQuantity = cur.getColumnIndex(OperationEntry.COLUMN_QUANTITY);
-        int colDate = cur.getColumnIndex(OperationEntry.COLUMN_DATE);
-        int colIdCategory = cur.getColumnIndex(OperationEntry.COLUMN_ID_CATEGORY);
-        int colCategory = cur.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
-        int colIdType = cur.getColumnIndex(OperationEntry.COLUMN_ID_TYPE_OPERATION);
-        int colType = cur.getColumnIndex(TypeOperationEntry.COLUMN_DESCRIPTION);
+        int colId = cursor.getColumnIndex(FinanceContract.OperationEntry._ID);
+        int colDescription = cursor.getColumnIndex(OperationEntry.COLUMN_DESCRIPTION);
+        int colQuantity = cursor.getColumnIndex(OperationEntry.COLUMN_QUANTITY);
+        int colDate = cursor.getColumnIndex(OperationEntry.COLUMN_DATE);
+        int colIdCategory = cursor.getColumnIndex(OperationEntry.COLUMN_ID_CATEGORY);
+        int colCategory = cursor.getColumnIndex(CategotyEntry.COLUMN_DESCRIPTION);
+        int colIdType = cursor.getColumnIndex(OperationEntry.COLUMN_ID_TYPE_OPERATION);
+        int colType = cursor.getColumnIndex(TypeOperationEntry.COLUMN_DESCRIPTION);
 
-        while(cur.moveToNext()){
+        while(cursor.moveToNext()){
             String id;
             String description;
             String quantity;
@@ -125,14 +126,14 @@ public class OperationDB {
             String idType;
             String desType;
 
-            id = cur.getString(colId);
-            description = cur.getString(colDescription);
-            quantity  = cur.getString(colQuantity);
-            date  = cur.getString(colDate);
-            idCategory = cur.getString(colIdCategory);
-            desCategory = cur.getString(colCategory);
-            idType = cur.getString(colIdType);
-            desType = cur.getString(colType);
+            id = cursor.getString(colId);
+            description = cursor.getString(colDescription);
+            quantity  = cursor.getString(colQuantity);
+            date  = cursor.getString(colDate);
+            idCategory = cursor.getString(colIdCategory);
+            desCategory = cursor.getString(colCategory);
+            idType = cursor.getString(colIdType);
+            desType = cursor.getString(colType);
 
             Category category = new Category(idCategory,desCategory);
             TypeOperation typeOperation = new TypeOperation(idType,desType);

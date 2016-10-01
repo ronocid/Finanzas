@@ -2,11 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="15dp"
     android:weightSum="1">
 
     <RelativeLayout
-        style="@style/layout_item_operation_list_green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -14,7 +12,9 @@
             android:id="@+id/container"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:background="@color/deposit">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,69 +49,82 @@
                 android:id="@+id/tvQuantity" />
         </LinearLayout>
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/container"
+            android:paddingTop="18dp"
+            android:background="@color/deposit">
+
+            <LinearLayout
+                android:id="@+id/layoutDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingLeft="10dp"
+                android:paddingRight="15dp"
+                android:layout_below="@id/container"
+                android:layout_marginBottom="5dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Fecha: "
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/depositdark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="12/03/2016 12:48"
+                        android:textColor="@color/depositdark"
+                        android:id="@+id/tvDate" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Descripción: "
+                        android:textStyle="bold"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/depositdark"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Este es el texto de la descripcion de esta operacion"
+                        android:textColor="@color/depositdark"
+                        android:id="@+id/tvDescription" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
         <org.aplie.android.myapplication.components.ElementDeployGreen
             android:id="@+id/deployHoritzontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/container"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginTop="-16dp"/>
 
-        <LinearLayout
-            android:id="@+id/layoutDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:paddingLeft="10dp"
-            android:paddingRight="15dp"
-            android:layout_below="@id/deployHoritzontal"
-            android:layout_marginBottom="5dp">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Fecha: "
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="12/03/2016 12:48"
-                    android:textColor="@color/white"
-                    android:id="@+id/tvDate" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Descripción: "
-                    android:textStyle="bold"
-                    android:gravity="center_horizontal"
-                    android:textColor="@color/white"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Este es el texto de la descripcion de esta operacion"
-                    android:textColor="@color/white"
-                    android:id="@+id/tvDescription" />
-            </LinearLayout>
-        </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

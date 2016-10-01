@@ -16,9 +16,9 @@ import java.util.List;
 
 public class AdapterExpandibleListMonth extends BaseExpandableListAdapter{
     private final Context contetx;
-    private final List<GroupItem> listGroup;
+    private final List<GroupItemMonth> listGroup;
 
-    public AdapterExpandibleListMonth(Context context, List<GroupItem> listGroup){
+    public AdapterExpandibleListMonth(Context context, List<GroupItemMonth> listGroup){
         this.contetx = context;
         this.listGroup = listGroup;
     }
@@ -79,12 +79,12 @@ public class AdapterExpandibleListMonth extends BaseExpandableListAdapter{
         TextView spend = (TextView) view.findViewById(R.id.gasto);
         TextView deposit = (TextView) view.findViewById(R.id.ingreso);
 
-        if(FinanceConstants.INGRESO.equals(operation.getTypeOperation().getDescription())){
+        if(FinanceConstants.INGRESO.equals(operation.getTypeOperation().getOperationDescription())){
             spend.setVisibility(View.GONE);
             deposit.setText(operation.getQuantity()+ FinanceConstants.EURO);
         }else{
             deposit.setVisibility(View.GONE);
-            spend.setText(operation.getQuantity() + FinanceConstants.EURO);
+            spend.setText(FinanceConstants.LESS + operation.getQuantity() + FinanceConstants.EURO);
         }
 
         return view;

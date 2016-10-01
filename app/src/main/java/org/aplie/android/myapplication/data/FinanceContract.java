@@ -34,7 +34,7 @@ public class FinanceContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_USER;
 
         public static final String TABLE_NAME = "users";
-        public static final String COLUMN_USER_NAME = "username";
+        public static final String COLUMN_USER_NAME = "userName";
         public static final String COLUMN_PASSWORD = "password";
         public static final String COLUMN_EMAIL = "email";
 
@@ -67,7 +67,7 @@ public class FinanceContract {
         public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_TYPE_OPERATION;
 
         public static final String TABLE_NAME = "type_operation";
-        public static final String COLUMN_DESCRIPTION = "tydescription";
+        public static final String COLUMN_DESCRIPTION = "operationDescription";
 
         public static Uri buildTypeOperationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);

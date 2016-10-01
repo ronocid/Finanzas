@@ -17,10 +17,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="buttonSave">
-        <item name="android:background">@drawable/button</item>
+    <style name="button_login">
+        <item name="android:background">@drawable/button_login</item>
         <item name="android:textColor">@drawable/button_text</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:drawablePadding">10dip</item>
         <item name="android:layout_marginTop">10dp</item>
     </style>
@@ -30,6 +31,20 @@
         <item name="android:textColor">@color/textBlue</item>
         <item name="android:gravity">top|left</item>
         <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="style_text">
+        <item name="android:background">@drawable/shape_text</item>
+        <item name="android:textColor">@color/textBlue</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColorHint">@color/darkBlue</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">8dp</item>
+    </style>
+
+    <style name="style_header_login">
+        <item name="android:background">@drawable/shape_header_login</item>
     </style>
 
     <style name="layout_date">
@@ -46,6 +61,14 @@
 
     <style name="layout">
         <item name="android:background">@drawable/shape_data_new_operation</item>
+    </style>
+
+    <style name="style_count_green">
+        <item name="android:background">@drawable/shape_count_operation_green</item>
+    </style>
+
+    <style name="style_count_red">
+        <item name="android:background">@drawable/shape_count_operation_red</item>
     </style>
 
 </resources>

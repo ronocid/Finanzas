@@ -18,10 +18,10 @@ import org.aplie.android.myapplication.bean.TypeOperation;
 import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.components.ElementDate;
 import org.aplie.android.myapplication.components.ElementOperation;
-import org.aplie.android.myapplication.data.CategoriesDB;
-import org.aplie.android.myapplication.data.OperationDB;
-import org.aplie.android.myapplication.data.TypeOperationDB;
-import org.aplie.android.myapplication.data.UsersDB;
+import org.aplie.android.myapplication.data.tables.CategoriesDB;
+import org.aplie.android.myapplication.data.tables.OperationDB;
+import org.aplie.android.myapplication.data.tables.TypeOperationDB;
+import org.aplie.android.myapplication.data.tables.UsersDB;
 import org.aplie.android.myapplication.dialogs.DialogNewCategory;
 
 import java.util.List;

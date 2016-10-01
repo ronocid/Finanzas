@@ -12,4 +12,5 @@
     <color name="spending">#FF0000</color>
     <color name="depositdark">#129803</color>
     <color name="spendingdark">#d60606</color>
+    <color name="lightGray">#eaeaea</color>
 </resources>

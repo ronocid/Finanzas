@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import org.aplie.android.myapplication.bean.User;
 import org.aplie.android.myapplication.data.FinancePreferences;
-import org.aplie.android.myapplication.data.UsersDB;
+import org.aplie.android.myapplication.data.tables.UsersDB;
 
 import java.util.ArrayList;
 import java.util.List;
